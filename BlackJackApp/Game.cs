@@ -122,7 +122,7 @@
             Console.WriteLine("The Dealer has Blackjack, let's look at the Players...");
             Thread.Sleep(4000);
 
-            foreach (var player in Players)
+            foreach (var player in Players.Where(p => !p.IsDealer))
             {
               foreach (var hand in player.Hand)
               {

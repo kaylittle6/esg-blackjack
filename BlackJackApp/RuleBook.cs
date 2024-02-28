@@ -62,7 +62,7 @@
         {
           hand.Cards.First(c => c is { CardValue: 11 }).ChangeAceValueToOne();
         }
-      } while (hand.Cards.Any(c => c is { CardValue: 11 }));
+      } while (hand.Cards.Any(c => c is { CardValue: 11 }) && hand.Value > 21);
     }
 
     public static void ResetPlayer(Player player)

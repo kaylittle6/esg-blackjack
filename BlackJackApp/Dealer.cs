@@ -198,7 +198,7 @@
               break;
             case "stand":
               askAgain = false;
-              break;
+              continue;
           }
 
           var handResult = RuleBook.CheckHand(hand);
