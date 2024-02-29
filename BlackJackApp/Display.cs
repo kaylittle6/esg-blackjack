@@ -67,10 +67,10 @@
           Console.WriteLine();
         }
 
-        foreach (var card in player.Hand.Where(hand => hand.Cards.Sum(cv => cv.CardValue) > 21
-                                                       && hand.Cards.Any(c => c.CardNumber == "Ace"))
-                   .SelectMany(hand => hand.Cards
-                     .Where(c => c.CardNumber == "Ace")))
+        foreach (var card in player.Hand.Where(hand => hand.Cards.Sum(cv => cv.CardValue) > 21 
+                  && hand.Cards.Any(c => c.CardNumber == "Ace"))
+                  .SelectMany(hand => hand.Cards
+                  .Where(c => c.CardNumber == "Ace")))
         {
           card.ChangeAceValueToOne();
         }
@@ -164,9 +164,9 @@
         }
 
         foreach (var card in player.Hand.Where(hand => hand.Cards.Sum(cv => cv.CardValue) > 21
-          && hand.Cards.Any(c => c.CardNumber == "Ace"))
-          .SelectMany(hand => hand.Cards
-          .Where(c => c.CardNumber == "Ace")))
+                  && hand.Cards.Any(c => c.CardNumber == "Ace"))
+                  .SelectMany(hand => hand.Cards
+                  .Where(c => c.CardNumber == "Ace")))
         {
           card.ChangeAceValueToOne();
         }

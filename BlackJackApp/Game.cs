@@ -4,7 +4,7 @@
   {
     private static Game? _gameClient;
 
-    public List<Player> Players { get; } = new();
+    public List<Player> Players { get; } = [];
     public Dealer Dealer { get; } = new("Dealer");
     public int MinimumBet { get; private set; }
     

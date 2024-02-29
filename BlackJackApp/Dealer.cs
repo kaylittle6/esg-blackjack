@@ -2,10 +2,9 @@
 {
   public class Dealer : Player
   {
-    public List<Card> Deck { get; private set; } = new();
+    public List<Card> Deck { get; private set; } = [];
     public int DeckCount { get; set; }
-    private bool NeedsReshuffle => Deck.Count < DeckCount * 52 * 0.25;
-
+    
     public Dealer(string name) : base(name)
     {
       Name = name;
@@ -144,7 +143,6 @@
       if (player.IsDealer || !player.InHand) { return; }
 
       var askAgain = true;
-      var response = "";
 
       for (var i = player.Hand.Count - 1; i >= 0; i--)
       {
@@ -173,7 +171,7 @@
           Console.WriteLine("Stand");
           Console.WriteLine();
 
-          response = Console.ReadLine()?.ToLower();
+          var response = Console.ReadLine()?.ToLower();
 
           switch (response)
           {
@@ -277,7 +275,7 @@
       Hand.Clear();
       Hand = [new Hand()];
         
-      if (NeedsReshuffle)
+      if (Deck.Count < DeckCount * 52 * 0.25)
       {
         GetDeck(DeckCount);
       }
