@@ -129,7 +129,6 @@
             if (response != "yes") continue;
           
             player.CurrentMoney -= hand.CurrentBet / 2;
-            hand.CurrentBet += hand.CurrentBet / 2;
             player.HasInsurance = true;
           }
           else
@@ -193,7 +192,7 @@
               break;
             case "stand":
               askAgain = false;
-              continue;
+              break;
           }
 
           var handResult = RuleBook.CheckHand(hand);
@@ -218,11 +217,6 @@
               break;
           }
         } while (askAgain);
-      }
-
-      if (response != "stand")
-      {
-        RuleBook.ResetPlayer(player);
       }
     }
 
