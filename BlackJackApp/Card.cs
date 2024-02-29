@@ -2,7 +2,7 @@
 {
   public class Card
   {
-    public string Display => GetCardDisplay();
+    public string Display => $"{CardNumber} of {CardSuit}";
     public string CardNumber { get; set; }
     private string CardSuit { get; set; }
     public int CardValue { get; private set; }
@@ -14,8 +14,6 @@
       CardSuit = cardSuit;
       CardValue = GetCardValue();
     }
-
-    private string GetCardDisplay() => $"{CardNumber} of {CardSuit}";
 
     private int GetCardValue()
     {

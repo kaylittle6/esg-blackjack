@@ -4,16 +4,11 @@
   {
     public List<Card> Deck { get; private set; } = new();
     public int DeckCount { get; set; }
-    private bool NeedsReshuffle => GetReshuffle();
+    private bool NeedsReshuffle => Deck.Count < DeckCount * 52 * 0.25;
 
     public Dealer(string name) : base(name)
     {
       Name = name;
-    }
-    
-    private bool GetReshuffle()
-    {
-      return Deck.Count < DeckCount * 52 * 0.25;
     }
     
     public void GetDeck(int numberOfDecks)
@@ -147,7 +142,7 @@
 
     public void AskForPlayerOptions(Player player)
     {
-      if (player.IsDealer || !player.InHand) { return; };
+      if (player.IsDealer || !player.InHand) { return; }
 
       var askAgain = true;
       var response = "";

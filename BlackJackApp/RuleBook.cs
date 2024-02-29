@@ -47,7 +47,7 @@
 
     public static void CheckForAceAndReduce(Hand hand)
     {
-      if (!hand.Cards.Any(c => c is { CardValue: 11 }) || hand.Value < 21) { return; };
+      if (!hand.Cards.Any(c => c is { CardValue: 11 }) || hand.Value < 21) { return; }
         
       do
       {
