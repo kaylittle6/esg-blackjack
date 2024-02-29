@@ -209,7 +209,7 @@
         {
           foreach (var hand in player.Hand)
           {
-            var winnings = hand.DoubledDown ? hand.CurrentBet * 4 : hand.CurrentBet * 2;
+            var winnings = hand.DoubledDown ? hand.CurrentBet * 2 : hand.CurrentBet;
             
             Console.Clear();
             Display.ShowTable(player, true);
@@ -224,7 +224,7 @@
             }
             else if (hand.Value < Dealer.Hand[0].Value)
             {
-              Console.WriteLine($"You lose. {winnings:C2} total in fact.");
+              Console.WriteLine($"You lose. {hand.CurrentBet:C2} total in fact.");
               Thread.Sleep(4000);
             }
             else

@@ -29,7 +29,7 @@
 
     public void ChangeAceValueToOne()
     {
-      CardValue = CardValue == 11 ? 1 : CardValue;
+      CardValue = 1;
     }
   }
 }

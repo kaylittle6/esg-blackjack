@@ -35,34 +35,25 @@
 
     public static HandResult CheckHand(Hand hand)
     {
-      do
+      CheckForAceAndReduce(hand);
+
+      return hand.Value switch
       {
-        if (hand.Cards.Any(c => c is { CardValue: 11 }) && hand.Value > 21)
-        {
-          hand.Cards.First(c => c is { CardValue: 11 }).ChangeAceValueToOne();
-        }
-
-        switch (hand.Value)
-        {
-          case 21:
-            return HandResult.HandBlackjack;
-          case > 21:
-            return HandResult.HandBusted;
-        }
-      } while (hand.Cards.Any(c => c is { CardValue: 11 }) && hand.Value < 21);
-
-      return HandResult.HandValid;
+        21 => HandResult.HandBlackjack,
+        > 21 => HandResult.HandBusted,
+        _ => HandResult.HandValid
+      };
     }
 
-    public static void ReduceAceValueToOne(Hand hand)
+    public static void CheckForAceAndReduce(Hand hand)
     {
+      if (!hand.Cards.Any(c => c is { CardValue: 11 }) || hand.Value < 21) { return; };
+        
       do
       {
-        if (hand.Cards.Any(c => c is { CardValue: 11 }) && hand.Value > 21)
-        {
-          hand.Cards.First(c => c is { CardValue: 11 }).ChangeAceValueToOne();
-        }
-      } while (hand.Cards.Any(c => c is { CardValue: 11 }) && hand.Value > 21);
+        hand.Cards.First(c => c is { CardValue: 11 }).ChangeAceValueToOne();
+        
+      } while (hand.Value > 21 && !hand.Cards.Any(c => c is { CardValue: 11 }));
     }
 
     public static void ResetPlayer(Player player)

@@ -147,28 +147,28 @@
 
     public void AskForPlayerOptions(Player player)
     {
-      if (player.IsDealer || !player.InHand)
-      {
-        return;
-      }
+      if (player.IsDealer || !player.InHand) { return; };
 
       var askAgain = true;
       var response = "";
 
-      foreach (var hand in player.Hand)
+      for (var i = player.Hand.Count - 1; i >= 0; i--)
       {
+        var hand = player.Hand[i];
+        
         do
         {
           Console.Clear();
           Display.ShowTable(player, false);
           Console.WriteLine();
-          Console.WriteLine($"{player.Name}, here are you options:");
+          Console.Write($"{player.Name}, here are you options");
+          Console.WriteLine(player.Hand.Count > 1 ? $" for Hand {i + 1}: " : ": ");
           Console.WriteLine();
 
-          if (hand.Cards.Count == 2)
+          if (hand.Cards.Count == 2 && hand.CurrentBet <= player.CurrentMoney)
           {
             Console.WriteLine("Double Down");
-
+            
             if (hand.Cards[0].CardNumber == hand.Cards[1].CardNumber)
             {
               Console.WriteLine("Split");
@@ -218,6 +218,7 @@
               Console.WriteLine($"{player.Name}, you busted! You lose ${hand.CurrentBet}");
               Console.WriteLine();
               askAgain = false;
+              player.Hand.RemoveAt(i);
               Thread.Sleep(4000);
               break;
           }
@@ -242,8 +243,8 @@
       newHand.Cards.Add(hand.Cards[1]);
       hand.Cards.RemoveAt(1);
       
-      DealCard(newHand);
       DealCard(hand);
+      DealCard(newHand);
       
       AskForPlayerOptions(player);
     }
@@ -259,7 +260,7 @@
         Console.WriteLine("Dealer hitting...");
         Thread.Sleep(3000);
         DealCard(Hand[0]);
-        RuleBook.ReduceAceValueToOne(Hand[0]);
+        RuleBook.CheckForAceAndReduce(Hand[0]);
         Console.Clear();
         Display.ShowDealersActions(this);
         Thread.Sleep(4000);
